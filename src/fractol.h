@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sjones <sjones@student.42.us.org>          +#+  +:+       +#+        */
+/*   By: rlevine <rlevine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 12:36:35 by sjones            #+#    #+#             */
-/*   Updated: 2017/11/09 13:28:10 by sjones           ###   ########.fr       */
+/*   Updated: 2017/11/10 14:42:14 by rlevine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include <math.h>
+# include <complex.h>
 
 # define WIN_X 1000
 # define WIN_Y 1000
@@ -50,7 +52,8 @@ typedef struct		s_super
 	t_map			*m;
 }					t_super;
 
-void				julia(int p);
+
+int					julia(double x, double y, double complex deg);
 void				mandelbrot(int p);
 
 #endif

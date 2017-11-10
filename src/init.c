@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sjones <sjones@student.42.us.org>          +#+  +:+       +#+        */
+/*   By: rlevine <rlevine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 13:06:36 by sjones            #+#    #+#             */
-/*   Updated: 2017/11/09 13:27:14 by sjones           ###   ########.fr       */
+/*   Updated: 2017/11/09 13:45:16 by rlevine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,3 +40,4 @@ static t_win	*init_win(void)
 	w->h = WIN_Y;
 	w->mlx = mlx_init();
 	w->win = mlx_new_window(w->mlx, w->w, w->h, win->t);
+}

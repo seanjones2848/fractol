@@ -3,19 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   mandelbrot.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sjones <sjones@student.42.us.org>          +#+  +:+       +#+        */
+/*   By: rlevine <rlevine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 13:01:51 by sjones            #+#    #+#             */
-/*   Updated: 2017/11/09 13:03:14 by sjones           ###   ########.fr       */
+/*   Updated: 2017/11/10 15:17:16 by rlevine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	mandelbrot(int p)
+int	mand(double x, double y, double complex deg)
 {
-	if (p < 3)
-		write(1, "2\n", 2);
-	else
-		write(1, "3\n", 2);
+	double complex	z;
+	int				ret;
+	int				maxloop = 100;
+	double complex	c;
+
+	c = x + y * I;
+	ret = 0;
+	z = 0;
+	while (cabs(z) < 2 && ret < maxloop)
+	{
+		z = cpow(z, deg) + c;
+		ret ++;
+	}
+	return ret;
 }
+
