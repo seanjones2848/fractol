@@ -6,11 +6,8 @@
 /*   By: rlevine <rlevine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 13:06:36 by sjones            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2017/11/09 13:45:16 by rlevine          ###   ########.fr       */
-=======
+/*   Updated: 2017/11/10 19:13:47 by sjones           ###   ########.fr       */
 /*   Updated: 2017/11/09 20:47:03 by sjones           ###   ########.fr       */
->>>>>>> ee9fa5d0ecc41f3ba801705ae301ce543260272f
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +26,6 @@ static t_win	*init_win(void)
 	w->w = WIN_X;
 	w->h = WIN_Y;
 	w->mlx = mlx_init();
-<<<<<<< HEAD
-	w->win = mlx_new_window(w->mlx, w->w, w->h, win->t);
-=======
 	w->win = mlx_new_window(w->mlx, w->w, w->h, w->t);
 	return (w);
 }
@@ -40,7 +34,7 @@ static t_input	*init_input(void)
 {
 	t_input	*i;
 
-	if (!(i = (t_input)malloc(sizeof(t_input))))
+	if (!(i = (t_input*)malloc(sizeof(t_input))))
 	{
 		write(1, "malloc failed on t_input\n", 25);
 		return NULL;
@@ -53,11 +47,12 @@ static t_map	*init_map(char t, int p)
 {
 	t_map	*m;
 
-	if (!(m = (t_map)malloc(sizeof(t_map))))
+	if (!(m = (t_map*)malloc(sizeof(t_map))))
 	{
 		write(1, "malloc failed on t_map\n", 23);
 		return NULL;
 	}
+	ft_bzero(m, sizeof(t_map));
 	m->t = t;
 	m->p = p;
 	return (m);
@@ -73,7 +68,7 @@ t_super			*init_super(char t, int p)
 		return NULL;
 	}
 	s->w = init_win();
-	s->i = init_keys();
+	s->i = init_input();
 	s->m = init_map(t, p);
->>>>>>> ee9fa5d0ecc41f3ba801705ae301ce543260272f
+	return (s);
 }
