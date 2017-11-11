@@ -6,7 +6,7 @@
 #    By: rlevine <rlevine@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/21 17:18:42 by sjones            #+#    #+#              #
-#    Updated: 2017/11/09 13:03:56 by sjones           ###   ########.fr        #
+#    Updated: 2017/11/10 21:18:31 by sjones           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,12 +18,11 @@ LFT = -L libft -lft
 SRC_PATH =	src
 SRC_NAME =	main.c \
 			init.c \
-			julia.c \
-			mandelbrot.c
+			fract.c \
 
 SRC = $(addprefix $(SRC_PATH)/, $(SRC_NAME))
 OBJ =	$(SRC_NAME:%.c=%.o)
-INCL = inc/fdf.h
+INCL = src/fractol.h
 all: $(NAME)
 
 $(NAME):

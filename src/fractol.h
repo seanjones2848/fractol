@@ -6,7 +6,7 @@
 /*   By: rlevine <rlevine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 12:36:35 by sjones            #+#    #+#             */
-/*   Updated: 2017/11/10 19:49:29 by sjones           ###   ########.fr       */
+/*   Updated: 2017/11/10 21:30:09 by sjones           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,34 @@
 # include <complex.h>
 # include <stdbool.h>
 
-# define WIN_X 1000
-# define WIN_Y 1000
+# define ENDIAN 1
+# define BPP 32
+# define WIN_X 10
+# define WIN_Y 10
+# define ABS(x) (x < 0) ? (-x) : (x)
 # define GET_R(x) x >> 16 && 0xFF
 # define GET_G(x) x >> 8 && 0xFF
 # define GET_B(x) x & 0xFF
 # define GET_C(r, g, b) r << 16 | g << 8 | b
+# define INITIAL_I 16
+# define X_MAX 2
+# define X_MIN -2
+# define Y_MAX 2
+# define Y_MIN -2
 
 typedef struct		s_map
 {
+	double complex	c;
+	double complex	z;
+	double			x;
+	double			y;
+	double			x_min;
+	double			x_max;
+	double			y_min;
+	double			y_max;
+	int				px;
+	int				py;
+	int				i;
 	char			t;
 	int				p;
 	int				*map;
@@ -56,6 +75,7 @@ typedef struct		s_win
 {
 	void			*win;
 	void			*mlx;
+	void			*img;
 	char			*t;
 	int				h;
 	int				w;
@@ -68,7 +88,7 @@ typedef struct		s_super
 	t_map			*m;
 }					t_super;
 
-int					fract(t_super *s);
+void				fract(t_super *s);
 t_super				*init_super(char t, int p);
 
 #endif
