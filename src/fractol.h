@@ -6,11 +6,7 @@
 /*   By: rlevine <rlevine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 12:36:35 by sjones            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2017/11/10 14:42:14 by rlevine          ###   ########.fr       */
-=======
-/*   Updated: 2017/11/09 20:50:04 by sjones           ###   ########.fr       */
->>>>>>> ee9fa5d0ecc41f3ba801705ae301ce543260272f
+/*   Updated: 2017/11/10 19:49:29 by sjones           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +19,9 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
-<<<<<<< HEAD
 # include <math.h>
 # include <complex.h>
-=======
 # include <stdbool.h>
->>>>>>> ee9fa5d0ecc41f3ba801705ae301ce543260272f
 
 # define WIN_X 1000
 # define WIN_Y 1000
@@ -75,8 +68,7 @@ typedef struct		s_super
 	t_map			*m;
 }					t_super;
 
-
-int					julia(double x, double y, double complex deg);
-void				mandelbrot(int p);
+int					fract(t_super *s);
+t_super				*init_super(char t, int p);
 
 #endif

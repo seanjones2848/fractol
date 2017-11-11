@@ -6,7 +6,7 @@
 /*   By: rlevine <rlevine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 12:46:54 by sjones            #+#    #+#             */
-/*   Updated: 2017/11/10 19:18:46 by rlevine          ###   ########.fr       */
+/*   Updated: 2017/11/10 19:47:43 by sjones           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,16 @@ int		main(int ac, char **av)
 		return (0);
 	}
 	if (ft_strcmp(av[1], "julia") == 0)
-		julia(2);
+		s = init_super('j', 2);
 	else if (ft_strcmp(av[1], "julia3") == 0)
-		julia(3);
+		s = init_super('j', 3);
 	else if (ft_strcmp(av[1], "mandelbrot") == 0)
-		mandelbrot(2);
+		s = init_super('m', 2);
 	else if (ft_strcmp(av[1], "mandelbrot3") == 0)
-		mandelbrot(3);
+		s = init_super('m', 3);
 	else
-		perror("usage: ./fractol [julia, julia3, mandelbrot, mandelbrot3]\n");	return (0);
-	s = init_super(1);
+		perror("usage: ./fractol [julia, julia3, mandelbrot, mandelbrot3]\n");
+	fract(s);
 	mlx_loop(s->w->mlx);
+	return (0);
 }
