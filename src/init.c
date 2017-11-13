@@ -6,7 +6,7 @@
 /*   By: rlevine <rlevine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 13:06:36 by sjones            #+#    #+#             */
-/*   Updated: 2017/11/10 21:28:42 by sjones           ###   ########.fr       */
+/*   Updated: 2017/11/13 14:13:00 by sjones           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ static t_win	*init_win(void)
 	w->t = "Fract'ol";
 	w->w = WIN_X;
 	w->h = WIN_Y;
+	w->b = BPP;
+	w->e = ENDIAN;
 	w->mlx = mlx_init();
 	w->win = mlx_new_window(w->mlx, w->w, w->h, w->t);
 	w->img = mlx_new_image(w->mlx, w->w, w->h);
@@ -43,7 +45,7 @@ static t_input	*init_input(void)
 	return (i);
 }
 
-static t_map	*init_map(char t, int p)
+static t_map	*init_map(t_win *w, char t, int p)
 {
 	t_map	*m;
 
@@ -53,7 +55,6 @@ static t_map	*init_map(char t, int p)
 		return NULL;
 	}
 	ft_bzero(m, sizeof(t_map));
-	m->map = (int*)malloc(sizeof(int) * WIN_X * WIN_Y);
 	m->t = t;
 	m->p = p;
 	m->i = INITIAL_I;
@@ -61,6 +62,8 @@ static t_map	*init_map(char t, int p)
 	m->x_max = X_MAX;
 	m->y_min = Y_MIN;
 	m->y_max = Y_MAX;
+	m->map = (int*)malloc(sizeof(int) * w->w * w->h);
+	//	m->map = (int*)mlx_get_data_addr(w->img, &w->b, &w->w, &w->e);
 	return (m);
 }
 
@@ -75,6 +78,6 @@ t_super			*init_super(char t, int p)
 	}
 	s->w = init_win();
 	s->i = init_input();
-	s->m = init_map(t, p);
+	s->m = init_map(s->w, t, p);
 	return (s);
 }

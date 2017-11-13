@@ -6,7 +6,7 @@
 /*   By: rlevine <rlevine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 12:36:35 by sjones            #+#    #+#             */
-/*   Updated: 2017/11/10 21:30:09 by sjones           ###   ########.fr       */
+/*   Updated: 2017/11/11 19:34:20 by sjones           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ typedef struct		s_win
 	char			*t;
 	int				h;
 	int				w;
+	int				b;
+	int				e;
 }					t_win;
 
 typedef struct		s_super
