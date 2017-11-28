@@ -6,7 +6,7 @@
 #    By: rlevine <rlevine@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/21 17:18:42 by sjones            #+#    #+#              #
-#    Updated: 2017/11/10 21:18:31 by sjones           ###   ########.fr        #
+#    Updated: 2017/11/27 15:44:50 by sjones           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,11 +26,11 @@ INCL = src/fractol.h
 all: $(NAME)
 
 $(NAME):
-	@echo "\033[1;33mFDF: Sources compiling... \033[0m"
+	@echo "\033[1;33mFractol: Sources compiling... \033[0m"
 	@make -C libft/
 	@$(CC) $(FLAGS) -I $(INCL) -c $(SRC)
 	@$(CC) -o $(NAME) $(OBJ) $(LFT) $(MLX)
-	@echo "\033[1;34mFDF: Compiled with success..!\033[0m"
+	@echo "\033[1;34mFractol: Compiled with success..!\033[0m"
 
 clean:
 	@make -C libft/ clean
@@ -40,6 +40,6 @@ clean:
 fclean: clean
 	@make -C libft/ fclean
 	@/bin/rm -rf $(NAME)
-	@echo "\033[0;36mFDF binary removed...\033[0m"
+	@echo "\033[0;36mFractol binary removed...\033[0m"
 
 re: fclean all

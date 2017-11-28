@@ -6,7 +6,7 @@
 /*   By: rlevine <rlevine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 13:06:36 by sjones            #+#    #+#             */
-/*   Updated: 2017/11/13 14:13:00 by sjones           ###   ########.fr       */
+/*   Updated: 2017/11/27 15:39:37 by sjones           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,8 @@ static t_win	*init_win(void)
 	w->t = "Fract'ol";
 	w->w = WIN_X;
 	w->h = WIN_Y;
-	w->b = BPP;
-	w->e = ENDIAN;
 	w->mlx = mlx_init();
 	w->win = mlx_new_window(w->mlx, w->w, w->h, w->t);
-	w->img = mlx_new_image(w->mlx, w->w, w->h);
 	return (w);
 }
 
@@ -45,7 +42,7 @@ static t_input	*init_input(void)
 	return (i);
 }
 
-static t_map	*init_map(t_win *w, char t, int p)
+static t_map	*init_map(char t, int p)
 {
 	t_map	*m;
 
@@ -62,9 +59,22 @@ static t_map	*init_map(t_win *w, char t, int p)
 	m->x_max = X_MAX;
 	m->y_min = Y_MIN;
 	m->y_max = Y_MAX;
-	m->map = (int*)malloc(sizeof(int) * w->w * w->h);
-	//	m->map = (int*)mlx_get_data_addr(w->img, &w->b, &w->w, &w->e);
 	return (m);
+}
+
+static t_img	*init_img(t_win *w)
+{
+	t_img	*i;
+
+	if (!(i = (t_img*)ft_memalloc(sizeof(t_img))))
+	{
+		write(1, "malloc failed on t_img\n", 23);
+		return NULL;
+	}
+	i->img = mlx_new_image(w->mlx, w->w, w->h);
+	i->data = (int*)mlx_get_data_addr(i->img, &i->bpp, &i->size, &i->e);
+	i->size /= 4;
+	return (i);
 }
 
 t_super			*init_super(char t, int p)
@@ -78,6 +88,7 @@ t_super			*init_super(char t, int p)
 	}
 	s->w = init_win();
 	s->i = init_input();
-	s->m = init_map(s->w, t, p);
+	s->m = init_map(t, p);
+	s->img = init_img(s->w);
 	return (s);
 }

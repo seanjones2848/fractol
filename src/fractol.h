@@ -6,7 +6,7 @@
 /*   By: rlevine <rlevine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 12:36:35 by sjones            #+#    #+#             */
-/*   Updated: 2017/11/11 19:34:20 by sjones           ###   ########.fr       */
+/*   Updated: 2017/11/27 16:19:13 by sjones           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,14 @@
 # include <complex.h>
 # include <stdbool.h>
 
-# define ENDIAN 1
-# define BPP 32
-# define WIN_X 10
-# define WIN_Y 10
+# define WIN_X 1000
+# define WIN_Y 1000
 # define ABS(x) (x < 0) ? (-x) : (x)
 # define GET_R(x) x >> 16 && 0xFF
 # define GET_G(x) x >> 8 && 0xFF
 # define GET_B(x) x & 0xFF
 # define GET_C(r, g, b) r << 16 | g << 8 | b
-# define INITIAL_I 16
+# define INITIAL_I 32
 # define X_MAX 2
 # define X_MIN -2
 # define Y_MAX 2
@@ -53,7 +51,6 @@ typedef struct		s_map
 	int				i;
 	char			t;
 	int				p;
-	int				*map;
 }					t_map;
 
 typedef struct		s_input
@@ -71,16 +68,22 @@ typedef struct		s_input
 	bool			space;
 }					t_input;
 
+typedef struct		s_img
+{
+	void			*img;
+	int				*data;
+	int				bpp;
+	int				size;
+	int				e;
+}					t_img;
+
 typedef struct		s_win
 {
 	void			*win;
 	void			*mlx;
-	void			*img;
 	char			*t;
 	int				h;
 	int				w;
-	int				b;
-	int				e;
 }					t_win;
 
 typedef struct		s_super
@@ -88,9 +91,11 @@ typedef struct		s_super
 	t_win			*w;
 	t_input			*i;
 	t_map			*m;
+	t_img			*img;
 }					t_super;
 
 void				fract(t_super *s);
 t_super				*init_super(char t, int p);
+void				draw(t_super *s);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: rlevine <rlevine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 13:00:08 by sjones            #+#    #+#             */
-/*   Updated: 2017/11/13 14:08:01 by sjones           ###   ########.fr       */
+/*   Updated: 2017/11/27 15:46:46 by sjones           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,14 @@
 
 static int	colorize(int i, t_super *s)
 {
-	printf("interations:{%d}\n", i);
 	return((int)(((float)i / (float)s->m->i) * 255) << 16 | 0xFF);
 }
-/*
+
 void		draw(t_super *s)
 {
-	
+	mlx_put_image_to_window(s->w->mlx, s->w->win, s->img->img, 0, 0);
 }
-*/
+
 void		fract(t_super *s)
 {
 	int				ret;
@@ -42,9 +41,7 @@ void		fract(t_super *s)
 				s->m->z = cpow(s->m->z, (double complex)s->m->p) + s->m->c;
 				ret ++;
 			}
-			s->m->map[(s->m->px * s->w->w) + s->m->py] = colorize(ret, s);
-			printf("px:{%d} py:{%d} x:{%f} y:{%f} color:{0x%08x}\n",\
-				s->m->px, s->m->py, s->m->x, s->m->y, s->m->map[s->m->px + s->m->py]);
+			s->img->data[s->m->px + (s->img->size * s->m->py)] = colorize(ret, s);
 			s->m->py++;
 			s->m->y += (ABS(s->m->y_max - s->m->y_min)) / s->w->h;
 		}

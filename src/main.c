@@ -6,7 +6,7 @@
 /*   By: rlevine <rlevine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 12:46:54 by sjones            #+#    #+#             */
-/*   Updated: 2017/11/10 21:19:39 by sjones           ###   ########.fr       */
+/*   Updated: 2017/11/27 15:42:10 by sjones           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int		main(int ac, char **av)
 		return (0);
 	}
 	fract(s);
-//	draw(s);
-//	mlx_loop(s->w->mlx);
+	draw(s);
+	mlx_loop(s->w->mlx);
 	return (0);
 }
