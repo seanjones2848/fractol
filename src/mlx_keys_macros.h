@@ -6,7 +6,7 @@
 /*   By: sjones <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 15:02:01 by sjones            #+#    #+#             */
-/*   Updated: 2017/10/26 16:07:07 by sjones           ###   ########.fr       */
+/*   Updated: 2017/11/27 19:39:17 by sjones           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,5 +130,9 @@
 # define KEY_PAD_ADD		69
 # define KEY_PAD_ENTER		76
 # define KEY_PAD_DOT		65
+# define MOUSE_LEFT			1
+# define MOUSE_RIGHT		2
+# define MOUSE_SCROLL_UP	4
+# define MOUSE_SCROLL_DOWN	5
 
 #endif

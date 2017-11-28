@@ -6,7 +6,7 @@
 /*   By: rlevine <rlevine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 12:36:35 by sjones            #+#    #+#             */
-/*   Updated: 2017/11/27 16:19:13 by sjones           ###   ########.fr       */
+/*   Updated: 2017/11/28 12:35:34 by sjones           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,23 @@
 # define GET_B(x) x & 0xFF
 # define GET_C(r, g, b) r << 16 | g << 8 | b
 # define INITIAL_I 32
+# define MAX_I 2048
 # define X_MAX 2
 # define X_MIN -2
 # define Y_MAX 2
 # define Y_MIN -2
+# define ZIN .9
+# define ZOUT 1.1
+
+enum
+{
+	in,
+	out,
+	up,
+	down,
+	left,
+	right
+}					direction;
 
 typedef struct		s_map
 {
@@ -57,8 +70,10 @@ typedef struct		s_input
 {
 	int				m_x;
 	int				m_y;
-	int				m_su;
-	int				m_sd;
+	bool			m_l;
+	bool			m_r;
+	bool			m_su;
+	bool			m_sd;
 	bool			c;
 	bool			x;
 	bool			up;
@@ -66,6 +81,8 @@ typedef struct		s_input
 	bool			left;
 	bool			right;
 	bool			space;
+	bool			draw;
+	bool			esc;
 }					t_input;
 
 typedef struct		s_img
@@ -94,8 +111,19 @@ typedef struct		s_super
 	t_img			*img;
 }					t_super;
 
-void				fract(t_super *s);
+int					fract(t_super *s);
 t_super				*init_super(char t, int p);
-void				draw(t_super *s);
+int					draw(t_super *s);
+void				zoom(int dir, t_super *s);
+void				move(int dir, t_super *s);
+int					key_press(int key, t_super *s);
+int					key_release(int key, t_super *s);
+int					mouse_press(int key, int x, int y, t_super *s);
+int					mouse_release(int key, int x, int y, t_super *s);
+int					motion_hook(int x, int y, t_super *s);
+int					expose_hook(t_super *s);
+int					loop_hook(t_super *s);
+void				shift_color(t_super *s);
+void				revert(t_super *s);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: rlevine <rlevine@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/21 17:18:42 by sjones            #+#    #+#              #
-#    Updated: 2017/11/27 15:44:50 by sjones           ###   ########.fr        #
+#    Updated: 2017/11/28 11:18:59 by sjones           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,11 @@ SRC_PATH =	src
 SRC_NAME =	main.c \
 			init.c \
 			fract.c \
+			color.c \
+			hooks.c	\
+			hooks_plus.c \
+			move.c \
+			zoom.c
 
 SRC = $(addprefix $(SRC_PATH)/, $(SRC_NAME))
 OBJ =	$(SRC_NAME:%.c=%.o)
