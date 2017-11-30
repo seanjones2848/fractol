@@ -6,7 +6,7 @@
 /*   By: sjones <sjones@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 19:43:15 by sjones            #+#    #+#             */
-/*   Updated: 2017/11/28 13:41:51 by sjones           ###   ########.fr       */
+/*   Updated: 2017/11/29 17:02:21 by sjones           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ int		expose_hook(t_super *s)
 
 int		motion_hook(int x, int y, t_super *s)
 {
-	if (!s->i->space && s->m->t == 'j')
+	if (!s->i->space)
 	{
-		s->i->m_x = x + s->w->w / 2;
-		s->i->m_y = y + s->w->h / 2;
+		s->i->m_x = x - s->w->w / 2;
+		s->i->m_y = y - s->w->h / 2;
 		s->i->draw = true;
 	}
 	return (0);
@@ -31,11 +31,8 @@ int		motion_hook(int x, int y, t_super *s)
 
 int		loop_hook(t_super *s)
 {
-	if (s->i->draw == true)
-	{
-		fract(s);
+	if (s->i->draw == true && fract(s))
 		s->i->draw = false;
-	}
 	if (s->i->up)
 		move(up, s);
 	if (s->i->down)

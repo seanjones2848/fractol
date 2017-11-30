@@ -6,7 +6,7 @@
 /*   By: rlevine <rlevine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 13:06:36 by sjones            #+#    #+#             */
-/*   Updated: 2017/11/27 15:39:37 by sjones           ###   ########.fr       */
+/*   Updated: 2017/11/29 16:51:34 by sjones           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,9 @@ static t_map	*init_map(char t, int p)
 	m->t = t;
 	m->p = p;
 	m->i = INITIAL_I;
-	m->x_min = X_MIN;
-	m->x_max = X_MAX;
-	m->y_min = Y_MIN;
-	m->y_max = Y_MAX;
+	m->cre = -0.7;
+	m->cim = 0.27015;
+	m->zoom = 1.0;
 	return (m);
 }
 

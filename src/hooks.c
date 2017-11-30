@@ -6,7 +6,7 @@
 /*   By: sjones <sjones@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 19:09:33 by sjones            #+#    #+#             */
-/*   Updated: 2017/11/28 13:29:21 by sjones           ###   ########.fr       */
+/*   Updated: 2017/11/29 17:03:35 by sjones           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,9 @@ int		key_release(int key, t_super *s)
 int		mouse_press(int key, int x, int y, t_super *s)
 {
 	if (key == MOUSE_LEFT && s->m->i <= MAX_I && (s->i->draw = true))
-	{
 		s->m->i += 4;
-		printf("s->m->i{%d}\n", s->m->i);
-	}
 	if (key == MOUSE_RIGHT && s->m->i >= 4 && (s->i->draw = true))
-	{
 		s->m->i -= 4;
-		printf("s->m->i{%d}\n", s->m->i);
-	}
 	if (key == MOUSE_SCROLL_UP)
 		zoom(in, s);
 	if (key == MOUSE_SCROLL_DOWN)

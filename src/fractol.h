@@ -6,7 +6,7 @@
 /*   By: rlevine <rlevine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 12:36:35 by sjones            #+#    #+#             */
-/*   Updated: 2017/11/28 12:35:34 by sjones           ###   ########.fr       */
+/*   Updated: 2017/11/29 17:06:26 by sjones           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <math.h>
-# include <complex.h>
 # include <stdbool.h>
 
 # define WIN_X 1000
@@ -51,19 +50,21 @@ enum
 
 typedef struct		s_map
 {
-	double complex	c;
-	double complex	z;
-	double			x;
-	double			y;
-	double			x_min;
-	double			x_max;
-	double			y_min;
-	double			y_max;
+	double			cre;
+	double			cim;
+	double			nre;
+	double			nim;
+	double			ore;
+	double			oim;
+	double			sx;
+	double			sy;
+	double			zoom;
 	int				px;
 	int				py;
 	int				i;
 	char			t;
 	int				p;
+	int				ret;
 }					t_map;
 
 typedef struct		s_input

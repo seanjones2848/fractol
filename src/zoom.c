@@ -6,7 +6,7 @@
 /*   By: sjones <sjones@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 20:01:49 by sjones            #+#    #+#             */
-/*   Updated: 2017/11/28 13:22:43 by sjones           ###   ########.fr       */
+/*   Updated: 2017/11/29 17:00:13 by sjones           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,8 @@
 void	zoom(int dir, t_super *s)
 {
 	if (dir == in)
-	{
-		s->m->x_max *= ZIN;
-		s->m->x_min *= ZIN;
-		s->m->y_max *= ZIN;
-		s->m->y_min *= ZIN;
-		printf("trying to zoom in\n");
-	}
+		s->m->zoom += 0.01;
 	else if (dir == out)
-	{
-		if (s->m->x_max < 2)
-			s->m->x_max *= ZOUT;
-		if (s->m->x_min > -2)
-			s->m->x_min *= ZOUT;
-		if (s->m->y_max < 2)
-			s->m->y_max *= ZOUT;
-		if (s->m->y_min > -2)
-			s->m->y_min *= ZOUT;
-		printf("trying to zoom out\n");
-	}
-	if (dir >= up && dir <= down)
-		s->i->draw = true;
+		s->m->zoom -= 0.01;
+	s->i->draw = true;
 }
