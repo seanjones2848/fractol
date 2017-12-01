@@ -6,7 +6,7 @@
 /*   By: rlevine <rlevine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 13:00:08 by sjones            #+#    #+#             */
-/*   Updated: 2017/11/30 16:12:35 by sjones           ###   ########.fr       */
+/*   Updated: 2017/11/30 17:06:36 by sjones           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ t_thread	*init_thread(t_super *s, int i)
 	t->t = s->m->t;
 	t->p = s->m->p;
 	t->c = s->m->c;
+	t->sc = s->m->sc;
 	t->i = s->m->i;
 	t->zoom = s->m->zoom;
 	t->sx = s->m->sx;

@@ -6,7 +6,7 @@
 /*   By: rlevine <rlevine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 12:46:54 by sjones            #+#    #+#             */
-/*   Updated: 2017/11/30 16:11:18 by sjones           ###   ########.fr       */
+/*   Updated: 2017/11/30 17:17:09 by sjones           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void		revert(t_super *s)
 	s->m->zoom = 1.0;
 	s->m->sx = 0.0;
 	s->m->sy = 0.0;
-	s->m->i = 16;
+	s->m->i = INITIAL_I;
 }
 
 int				main(int ac, char **av)

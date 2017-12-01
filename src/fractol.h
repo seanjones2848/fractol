@@ -6,7 +6,7 @@
 /*   By: rlevine <rlevine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 12:36:35 by sjones            #+#    #+#             */
-/*   Updated: 2017/11/30 16:17:39 by sjones           ###   ########.fr       */
+/*   Updated: 2017/11/30 17:06:50 by sjones           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <math.h>
 # include <stdbool.h>
 # include <pthread.h>
+# include <time.h>
 
 # define W s->w
 # define M s->m
@@ -71,6 +72,7 @@ typedef struct		s_thread
 	char			t;
 	int				p;
 	int				c;
+	int				sc;
 	int				ret;
 	int				id;
 	int				h;
@@ -98,6 +100,7 @@ typedef struct		s_map
 	int				i;
 	char			t;
 	int				p;
+	int				sc;
 	int				c;
 	int				ret;
 }					t_map;
