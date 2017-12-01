@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rlevine <rlevine@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sjones <sjones@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/09 12:46:54 by sjones            #+#    #+#             */
-/*   Updated: 2017/11/30 17:17:09 by sjones           ###   ########.fr       */
+/*   Created: 2017/12/01 13:38:25 by sjones            #+#    #+#             */
+/*   Updated: 2017/12/01 13:38:27 by sjones           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static t_super	*fractol_choice(char *s)
 	return (NULL);
 }
 
-void		revert(t_super *s)
+void			revert(t_super *s)
 {
 	s->m->zoom = 1.0;
 	s->m->sx = 0.0;

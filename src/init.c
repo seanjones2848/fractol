@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rlevine <rlevine@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sjones <sjones@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/09 13:06:36 by sjones            #+#    #+#             */
-/*   Updated: 2017/11/30 17:06:16 by sjones           ###   ########.fr       */
+/*   Created: 2017/12/01 13:37:46 by sjones            #+#    #+#             */
+/*   Updated: 2017/12/01 13:39:37 by sjones           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ static t_win	*init_win(void)
 {
 	t_win	*w;
 
-	if(!(w = (t_win*)malloc(sizeof(t_win))))
+	if (!(w = (t_win*)malloc(sizeof(t_win))))
 	{
 		write(1, "malloc failed on t_win\n", 23);
-		return NULL;
+		exit(-1);
 	}
 	w->t = "Fract'ol";
 	w->w = WIN_X;
@@ -33,12 +33,11 @@ static t_input	*init_input(void)
 {
 	t_input	*i;
 
-	if (!(i = (t_input*)malloc(sizeof(t_input))))
+	if (!(i = ft_memalloc(sizeof(*i))))
 	{
 		write(1, "malloc failed on t_input\n", 25);
-		return NULL;
+		exit(-1);
 	}
-	ft_bzero(i, sizeof(t_input));
 	return (i);
 }
 
@@ -46,19 +45,16 @@ static t_map	*init_map(char t, int p)
 {
 	t_map	*m;
 
-	if (!(m = (t_map*)malloc(sizeof(t_map))))
+	if (!(m = ft_memalloc(sizeof(*m))))
 	{
 		write(1, "malloc failed on t_map\n", 23);
-		return NULL;
+		exit(-1);
 	}
-	ft_bzero(m, sizeof(t_map));
 	m->t = t;
 	m->p = p;
 	m->sc = 8;
 	m->c = 0xFFFFFF;
 	m->i = INITIAL_I;
-	m->cre = -0.7;
-	m->cim = 0.27015;
 	m->zoom = 1.0;
 	return (m);
 }
@@ -67,7 +63,7 @@ static t_img	*init_img(t_win *w)
 {
 	t_img	*i;
 
-	if (!(i = (t_img*)ft_memalloc(sizeof(t_img))))
+	if (!(i = ft_memalloc(sizeof(*i))))
 	{
 		write(1, "malloc failed on t_img\n", 23);
 		exit(-1);
@@ -82,7 +78,7 @@ t_super			*init_super(char t, int p)
 {
 	t_super	*s;
 
-	if (!(s = (t_super*)malloc(sizeof(t_super))))
+	if (!(s = ft_memalloc(sizeof(*s))))
 	{
 		write(1, "malloc failed on t_super\n", 25);
 		exit(-1);

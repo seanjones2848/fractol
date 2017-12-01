@@ -6,7 +6,7 @@
 /*   By: sjones <sjones@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 19:09:33 by sjones            #+#    #+#             */
-/*   Updated: 2017/11/30 16:05:27 by sjones           ###   ########.fr       */
+/*   Updated: 2017/12/01 13:22:55 by sjones           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,11 @@ int		key_press(int key, t_super *s)
 	if (key == KEY_ESCAPE)
 		s->i->esc = true;
 	if (key == KEY_SPACEBAR)
-		s->i->space = false;
+		s->i->space = s->i->space == true ? (false) : (true);
+	if (key == KEY_F && (s->i->draw = true))
+		s->m->t = s->m->t == 'm' ? ('j') : ('m');
+	if (key == KEY_P && (s->i->draw = true))
+		s->m->p = s->m->p == 2 ? (3) : (2);
 	return (0);
 }
 
@@ -45,9 +49,7 @@ int		key_release(int key, t_super *s)
 		s->i->right = false;
 	if (key == KEY_ESCAPE)
 		exit(0);
-	if (key == KEY_SPACEBAR)
-		s->i->space = false;
-	return(0);
+	return (0);
 }
 
 int		mouse_press(int key, int x, int y, t_super *s)

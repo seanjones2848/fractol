@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fract.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rlevine <rlevine@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sjones <sjones@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/09 13:00:08 by sjones            #+#    #+#             */
-/*   Updated: 2017/11/30 17:06:36 by sjones           ###   ########.fr       */
+/*   Created: 2017/12/01 13:37:58 by sjones            #+#    #+#             */
+/*   Updated: 2017/12/01 13:42:30 by sjones           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,23 @@
 
 static void	inner_fract(t_thread *t)
 {
-	t->nre = 1.5 * (t->px - t->w / 2) / (0.5 * t->zoom * t->w) + t->sx / t->w;
-	t->nim = (t->py - t->h / 2) / (0.5 * t->zoom * t->h) + t->sy / t->h;
+	t->cre = t->t == 'm' ? ((t->px - t->w / 2) / (0.25 * t->zoom * t->w)
+			+ t->sx / t->w) : (t->m_x * 0.001);
+	t->cim = t->t == 'm' ? ((t->py - t->h / 2) / (0.25 * t->zoom * t->h)
+			+ t->sy / t->h) : (t->m_y * 0.001);
+	t->nre = t->t == 'm' ? (0) : ((t->px - t->w / 2) /
+			(0.25 * t->zoom * t->w) + t->sx / t->w);
+	t->nim = t->t == 'm' ? (0) : ((t->py - t->h / 2) / (0.25 * t->zoom * t->h)
+			+ t->sy / t->h);
 	while (fabs(t->nre * t->nre + t->nim * t->nim) < 4.0 && t->ret < t->i)
 	{
 		t->ore = t->nre;
 		t->oim = t->nim;
-		t->nre = t->ore * t->ore - t->oim * t->oim + t->cre;
-		t->nim = 2 * t->ore * t->oim + t->cim;
+		t->nre = t->p == 2 ? (t->ore * t->ore - t->oim * t->oim + t->cre) :
+			(t->ore * t->ore * t->ore - t->oim * t->oim * t->ore - 2 * t->ore
+			* t->oim * t->oim + t->cre);
+		t->nim = t->p == 2 ? (2 * t->ore * t->oim + t->cim) :
+			(3 * t->ore * t->ore * t->oim - t->oim * t->oim * t->oim + t->cim);
 		t->ret++;
 	}
 }

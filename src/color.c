@@ -6,7 +6,7 @@
 /*   By: sjones <sjones@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 20:08:33 by sjones            #+#    #+#             */
-/*   Updated: 2017/11/30 17:05:33 by sjones           ###   ########.fr       */
+/*   Updated: 2017/12/01 13:20:38 by sjones           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int			colorize(t_thread *t)
 {
-	return((int)(((float)t->ret / (float)t->i) * 0xFF) << t->sc ^ t->c);
+	return ((int)(((float)t->ret / (float)t->i) * 0xFF) << t->sc ^ t->c);
 }
 
 void		shift_color(t_super *s)
