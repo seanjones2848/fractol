@@ -6,13 +6,13 @@
 #    By: rlevine <rlevine@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/21 17:18:42 by sjones            #+#    #+#              #
-#    Updated: 2017/12/01 13:31:47 by sjones           ###   ########.fr        #
+#    Updated: 2017/12/01 13:53:09 by sjones           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fractol
 CC = gcc
-FLAGS = -Wall -Wextra -Werror -g
+FLAGS = -Wall -Wextra -Werror
 MLX = -L minilibx_macos -lmlx -framework OpenGL -framework AppKit
 LFT = -L libft -lft
 SRC_PATH =	src
