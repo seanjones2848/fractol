@@ -6,7 +6,7 @@
 /*   By: sjones <sjones@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 19:09:33 by sjones            #+#    #+#             */
-/*   Updated: 2017/11/29 17:03:35 by sjones           ###   ########.fr       */
+/*   Updated: 2017/11/30 16:05:27 by sjones           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 int		key_press(int key, t_super *s)
 {
 	if (key == KEY_C)
-		s->i->c = true;
+		shift_color(s);
 	if (key == KEY_X)
-		s->i->x = true;
+		revert(s);
 	if (key == KEY_W || key == KEY_UP)
 		s->i->up = true;
 	if (key == KEY_S || key == KEY_DOWN)
@@ -30,17 +30,11 @@ int		key_press(int key, t_super *s)
 		s->i->esc = true;
 	if (key == KEY_SPACEBAR)
 		s->i->space = false;
-	if (key)
-		s->i->draw = true;
 	return (0);
 }
 
 int		key_release(int key, t_super *s)
 {
-	if (key == KEY_C)
-		s->i->c = false;
-	if (key == KEY_X)
-		s->i->x = false;
 	if (key == KEY_W || key == KEY_UP)
 		s->i->up = false;
 	if (key == KEY_S || key == KEY_DOWN)
@@ -50,7 +44,7 @@ int		key_release(int key, t_super *s)
 	if (key == KEY_D || key == KEY_RIGHT)
 		s->i->right = false;
 	if (key == KEY_ESCAPE)
-		s->i->esc = false;
+		exit(0);
 	if (key == KEY_SPACEBAR)
 		s->i->space = false;
 	return(0);

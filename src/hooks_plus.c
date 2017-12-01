@@ -6,7 +6,7 @@
 /*   By: sjones <sjones@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 19:43:15 by sjones            #+#    #+#             */
-/*   Updated: 2017/11/29 17:02:21 by sjones           ###   ########.fr       */
+/*   Updated: 2017/11/30 16:05:15 by sjones           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		motion_hook(int x, int y, t_super *s)
 	{
 		s->i->m_x = x - s->w->w / 2;
 		s->i->m_y = y - s->w->h / 2;
-		s->i->draw = true;
+		//s->i->draw = true;
 	}
 	return (0);
 }
@@ -41,11 +41,5 @@ int		loop_hook(t_super *s)
 		move(left, s);
 	if (s->i->right)
 		move(right, s);
-	if (s->i->c)
-		shift_color(s);
-	if (s->i->x)
-		revert(s);
-	if (s->i->esc)
-		exit(0);
 	return (0);
 }

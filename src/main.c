@@ -6,7 +6,7 @@
 /*   By: rlevine <rlevine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 12:46:54 by sjones            #+#    #+#             */
-/*   Updated: 2017/11/29 17:00:36 by sjones           ###   ########.fr       */
+/*   Updated: 2017/11/30 16:11:18 by sjones           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,14 @@ static t_super	*fractol_choice(char *s)
 	else if (ft_strcmp(s, "mandelbrot3") == 0)
 		return (init_super('m', 3));
 	return (NULL);
+}
+
+void		revert(t_super *s)
+{
+	s->m->zoom = 1.0;
+	s->m->sx = 0.0;
+	s->m->sy = 0.0;
+	s->m->i = 16;
 }
 
 int				main(int ac, char **av)

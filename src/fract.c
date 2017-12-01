@@ -6,61 +6,105 @@
 /*   By: rlevine <rlevine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 13:00:08 by sjones            #+#    #+#             */
-/*   Updated: 2017/11/29 16:56:52 by sjones           ###   ########.fr       */
+/*   Updated: 2017/11/30 16:12:35 by sjones           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static int	colorize(int i, t_super *s)
+static void	inner_fract(t_thread *t)
 {
-	return((int)(((float)i / (float)s->m->i) * 255) << 16 | 0xFF);
-}
-
-int			draw(t_super *s)
-{
-	mlx_put_image_to_window(s->w->mlx, s->w->win, s->img->img, 0, 0);
-	return (1);
-}
-
-void		revert(t_super *s)
-{
-	s->m->zoom = 1.0;
-	s->m->sx = 0.0;
-	s->m->sy = 0.0;
-	s->m->i = 16;
-}
-
-static void	inner_fract(t_super *s)
-{
-	s->m->nre = 1.5 * (s->m->px - s->w->w / 2) / (0.5 * s->m->zoom * s->w->w) + s->m->sx;
-	s->m->nim = (s->m->py - s->w->h / 2) / (0.5 * s->m->zoom * s->w->h) + s->m->sy;
-	while (fabs(s->m->nre * s->m->nre + s->m->nim * s->m->nim) < 4.0 && s->m->ret < s->m->i)
+	t->nre = 1.5 * (t->px - t->w / 2) / (0.5 * t->zoom * t->w) + t->sx / t->w;
+	t->nim = (t->py - t->h / 2) / (0.5 * t->zoom * t->h) + t->sy / t->h;
+	while (fabs(t->nre * t->nre + t->nim * t->nim) < 4.0 && t->ret < t->i)
 	{
-		s->m->ore = s->m->nre;
-		s->m->oim = s->m->nim;
-		s->m->nre = s->m->ore * s->m->ore - s->m->oim * s->m->oim + s->m->cre;
-		s->m->nim = 2 * s->m->ore * s->m->oim + s->m->cim;
-		s->m->ret++;
+		t->ore = t->nre;
+		t->oim = t->nim;
+		t->nre = t->ore * t->ore - t->oim * t->oim + t->cre;
+		t->nim = 2 * t->ore * t->oim + t->cim;
+		t->ret++;
 	}
+}
+
+static void	fract_it(t_thread *t)
+{
+	t->px = t->w / THREADS * (t->id - 1);
+	while (t->px < t->w / THREADS * (t->id))
+	{
+		t->py = 0;
+		while (t->py < t->h)
+		{
+			t->ret = 0;
+			inner_fract(t);
+			pthread_mutex_lock(&t->lock);
+			t->data[t->px + (t->size * t->py)] = colorize(t);
+			pthread_mutex_unlock(&t->lock);
+			t->py++;
+		}
+		t->px++;
+	}
+}
+
+t_thread	*init_thread(t_super *s, int i)
+{
+	t_thread	*t;
+
+	t = ft_memalloc(sizeof(*t));
+	t->id = i;
+	t->cre = s->m->cre;
+	t->cim = s->m->cim;
+	t->t = s->m->t;
+	t->p = s->m->p;
+	t->c = s->m->c;
+	t->i = s->m->i;
+	t->zoom = s->m->zoom;
+	t->sx = s->m->sx;
+	t->sy = s->m->sy;
+	t->h = s->w->h;
+	t->w = s->w->w;
+	t->m_x = s->i->m_x;
+	t->m_y = s->i->m_y;
+	t->data = s->img->data;
+	t->size = s->img->size;
+	t->lock = s->lock;
+	return (t);
+}
+
+static void	*fract_runner(void *v)
+{
+	t_thread		*t;
+
+	t = (t_thread*)v;
+	fract_it(t);
+	free(t);
+	pthread_exit(0);
 }
 
 int			fract(t_super *s)
 {
+	pthread_t	tids[THREADS];
+	t_thread	*t;
+	int			i;
 
-	s->m->px = 0;
-	while (s->m->px < s->w->w)
+	if (pthread_mutex_init(&s->lock, NULL) != 0)
 	{
-		s->m->py = 0;
-		while (s->m->py < s->w->h)
-		{
-			s->m->ret = 0;
-			inner_fract(s);
-			s->img->data[s->m->px + (s->img->size * s->m->py)]
-				= colorize(s->m->ret, s);
-			s->m->py++;
-		}
-		s->m->px++;
+		write(1, "mutex lock has failed\n", 22);
+		exit(-1);
 	}
-	return(draw(s));
+	i = 0;
+	while (i < THREADS)
+	{
+		t = init_thread(s, i + 1);
+		pthread_create(&tids[i], NULL, fract_runner, t);
+		i++;
+	}
+	i = 0;
+	while (i < THREADS)
+	{
+		pthread_join(tids[i], NULL);
+		i++;
+	}
+	pthread_mutex_destroy(&s->lock);
+	mlx_put_image_to_window(s->w->mlx, s->w->win, s->img->img, 0, 0);
+	return (1);
 }

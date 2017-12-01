@@ -6,7 +6,7 @@
 /*   By: rlevine <rlevine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 13:06:36 by sjones            #+#    #+#             */
-/*   Updated: 2017/11/29 16:51:34 by sjones           ###   ########.fr       */
+/*   Updated: 2017/11/30 16:26:14 by sjones           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ static t_map	*init_map(char t, int p)
 	ft_bzero(m, sizeof(t_map));
 	m->t = t;
 	m->p = p;
+	m->c = 0;
 	m->i = INITIAL_I;
 	m->cre = -0.7;
 	m->cim = 0.27015;
@@ -68,7 +69,7 @@ static t_img	*init_img(t_win *w)
 	if (!(i = (t_img*)ft_memalloc(sizeof(t_img))))
 	{
 		write(1, "malloc failed on t_img\n", 23);
-		return NULL;
+		exit(-1);
 	}
 	i->img = mlx_new_image(w->mlx, w->w, w->h);
 	i->data = (int*)mlx_get_data_addr(i->img, &i->bpp, &i->size, &i->e);
@@ -83,7 +84,7 @@ t_super			*init_super(char t, int p)
 	if (!(s = (t_super*)malloc(sizeof(t_super))))
 	{
 		write(1, "malloc failed on t_super\n", 25);
-		return NULL;
+		exit(-1);
 	}
 	s->w = init_win();
 	s->i = init_input();

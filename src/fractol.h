@@ -6,7 +6,7 @@
 /*   By: rlevine <rlevine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 12:36:35 by sjones            #+#    #+#             */
-/*   Updated: 2017/11/29 17:06:26 by sjones           ###   ########.fr       */
+/*   Updated: 2017/11/30 16:17:39 by sjones           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,12 @@
 # include <stdio.h>
 # include <math.h>
 # include <stdbool.h>
+# include <pthread.h>
 
+# define W s->w
+# define M s->m
+# define I s->i
+# define IMG s->img
 # define WIN_X 1000
 # define WIN_Y 1000
 # define ABS(x) (x < 0) ? (-x) : (x)
@@ -37,6 +42,7 @@
 # define Y_MIN -2
 # define ZIN .9
 # define ZOUT 1.1
+# define THREADS 8
 
 enum
 {
@@ -47,6 +53,34 @@ enum
 	left,
 	right
 }					direction;
+
+typedef struct		s_thread
+{
+	double			cre;
+	double			cim;
+	double			nre;
+	double			nim;
+	double			ore;
+	double			oim;
+	double			sx;
+	double			sy;
+	double			zoom;
+	int				px;
+	int				py;
+	int				i;
+	char			t;
+	int				p;
+	int				c;
+	int				ret;
+	int				id;
+	int				h;
+	int				w;
+	int				m_x;
+	int				m_y;
+	int				*data;
+	int				size;
+	pthread_mutex_t	lock;
+}					t_thread;
 
 typedef struct		s_map
 {
@@ -64,6 +98,7 @@ typedef struct		s_map
 	int				i;
 	char			t;
 	int				p;
+	int				c;
 	int				ret;
 }					t_map;
 
@@ -110,6 +145,7 @@ typedef struct		s_super
 	t_input			*i;
 	t_map			*m;
 	t_img			*img;
+	pthread_mutex_t	lock;
 }					t_super;
 
 int					fract(t_super *s);
@@ -124,6 +160,7 @@ int					mouse_release(int key, int x, int y, t_super *s);
 int					motion_hook(int x, int y, t_super *s);
 int					expose_hook(t_super *s);
 int					loop_hook(t_super *s);
+int					colorize(t_thread *t);
 void				shift_color(t_super *s);
 void				revert(t_super *s);
 
