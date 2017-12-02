@@ -6,7 +6,7 @@
 /*   By: sjones <sjones@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 13:37:58 by sjones            #+#    #+#             */
-/*   Updated: 2017/12/01 13:42:30 by sjones           ###   ########.fr       */
+/*   Updated: 2017/12/01 16:00:39 by sjones           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,9 @@ static void	inner_fract(t_thread *t)
 		t->ore = t->nre;
 		t->oim = t->nim;
 		t->nre = t->p == 2 ? (t->ore * t->ore - t->oim * t->oim + t->cre) :
-			(t->ore * t->ore * t->ore - t->oim * t->oim * t->ore - 2 * t->ore
-			* t->oim * t->oim + t->cre);
+			(t->ore * (t->ore * t->ore - 3 * t->oim * t->oim) + t->cre);
 		t->nim = t->p == 2 ? (2 * t->ore * t->oim + t->cim) :
-			(3 * t->ore * t->ore * t->oim - t->oim * t->oim * t->oim + t->cim);
+			(t->oim * (3 * t->ore * t->ore - t->oim * t->oim) + t->cim);
 		t->ret++;
 	}
 }
