@@ -6,7 +6,7 @@
 /*   By: sjones <sjones@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 13:38:08 by sjones            #+#    #+#             */
-/*   Updated: 2017/12/01 13:56:50 by sjones           ###   ########.fr       */
+/*   Updated: 2017/12/01 17:40:50 by sjones           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ typedef struct		s_thread
 	int				m_y;
 	int				*data;
 	int				size;
-	pthread_mutex_t	lock;
 }					t_thread;
 
 typedef struct		s_map
@@ -148,7 +147,6 @@ typedef struct		s_super
 	t_input			*i;
 	t_map			*m;
 	t_img			*img;
-	pthread_mutex_t	lock;
 }					t_super;
 
 int					fract(t_super *s);

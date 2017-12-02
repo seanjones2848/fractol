@@ -6,7 +6,7 @@
 /*   By: sjones <sjones@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 13:37:58 by sjones            #+#    #+#             */
-/*   Updated: 2017/12/01 16:00:39 by sjones           ###   ########.fr       */
+/*   Updated: 2017/12/01 17:40:30 by sjones           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,7 @@ static void	fract_it(t_thread *t)
 		{
 			t->ret = 0;
 			inner_fract(t);
-			pthread_mutex_lock(&t->lock);
 			t->data[t->px + (t->size * t->py)] = colorize(t);
-			pthread_mutex_unlock(&t->lock);
 			t->py++;
 		}
 		t->px++;
@@ -75,7 +73,6 @@ t_thread	*init_thread(t_super *s, int i)
 	t->m_y = s->i->m_y;
 	t->data = s->img->data;
 	t->size = s->img->size;
-	t->lock = s->lock;
 	return (t);
 }
 
@@ -95,11 +92,6 @@ int			fract(t_super *s)
 	t_thread	*t;
 	int			i;
 
-	if (pthread_mutex_init(&s->lock, NULL) != 0)
-	{
-		write(1, "mutex lock has failed\n", 22);
-		exit(-1);
-	}
 	i = 0;
 	while (i < THREADS)
 	{
@@ -113,7 +105,6 @@ int			fract(t_super *s)
 		pthread_join(tids[i], NULL);
 		i++;
 	}
-	pthread_mutex_destroy(&s->lock);
 	mlx_put_image_to_window(s->w->mlx, s->w->win, s->img->img, 0, 0);
 	return (1);
 }
