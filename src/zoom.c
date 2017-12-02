@@ -6,7 +6,7 @@
 /*   By: sjones <sjones@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 20:01:49 by sjones            #+#    #+#             */
-/*   Updated: 2017/11/30 15:34:39 by sjones           ###   ########.fr       */
+/*   Updated: 2017/12/02 12:42:53 by sjones           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void	zoom(int dir, t_super *s)
 {
 	if (dir == in)
-		s->m->zoom *= 1.01;
+		s->m->zoom *= 1.1;
 	else if (dir == out)
-		s->m->zoom *= .99;
+		s->m->zoom *= .9;
 	s->i->draw = true;
 }
